@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>ERP</span>
+        <span class="spacer"></span>
+        <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="userMenu">Menu</button>
+        <mat-menu #userMenu="matMenu">
+            <button mat-menu-item>Profile</button>
+            <button mat-menu-item>Logout</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+  

@@ -1,0 +1,25 @@
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.login-card {
+    background-color: whitesmoke;
+    padding: 2%;
+}
+
+.login-card-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.login-card-title {
+    font-size: 54px;
+}
+
+.login-form-group {
+    display: flex;
+}
