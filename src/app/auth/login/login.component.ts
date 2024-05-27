@@ -3,13 +3,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordComponent } from '../../components/inputs/password/password.component';
 import { LoginService } from '../../shared/services/auths/login.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../shared/services/tools/toast.service';
 import { LoginRequest } from '../../shared/dto/requests/auths/login-request.model';
+import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -20,36 +21,57 @@ import { LoginRequest } from '../../shared/dto/requests/auths/login-request.mode
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
-    PasswordComponent
+    PasswordComponent,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  username: string = "";
-  password: string = "";
+  fg: FormGroup;  
 
-  constructor(private loginService: LoginService, private router: Router, private toastService: ToastService) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private toastService: ToastService,
+    private fb: FormBuilder
+  ) {
+    this.fg = this.fb.group({
+      username: ["", Validators.required],
+      password: ["", Validators.required]
+    });
+  }
+
+  private getFormValue(key: string): string {
+    return this.fg.get(key)?.value;
+  }
+
+  get username(): AbstractControl | null {
+    return this.fg.get("username");
+  }
 
   login(): void {
-    const request: LoginRequest = {
-      username: this.username,
-      password: this.password
+    if (this.fg.valid) {
+      const request: LoginRequest = {
+        username: this.getFormValue("username"),
+        password: this.getFormValue("password")
+      }
+      
+      this.loginService.login(request)
+        .subscribe({
+          next: response => {
+            sessionStorage.setItem("token", response.token);
+            this.router.navigate(["/"]);
+          },
+          error: () => this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
+        });    
     }
-    
-    this.loginService.login(request)
-      .subscribe({
-        next: response => {
-          sessionStorage.setItem("token", response.token);
-          this.router.navigate(["/"]);
-        },
-        error: () => this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
-      });
   }
 
   onPasswordChange(password: string): void {
-    this.password = password;
+    this.fg.patchValue({ password });    
   }
+
 }
