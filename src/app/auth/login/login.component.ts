@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordComponent } from '../../components/inputs/password/password.component';
-import { LoginService } from '../../shared/services/auths/login.service';
+import { LoginService } from '../../shared/services/auths/login/login.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../shared/services/tools/toast.service';
 import { LoginRequest } from '../../shared/dto/requests/auths/login-request.model';
@@ -63,9 +63,15 @@ export class LoginComponent {
         .subscribe({
           next: response => {
             sessionStorage.setItem("token", response.token);
-            this.router.navigate(["/"]);
+            console.log(response);
+            
+            //this.router.navigate(["/"]);
           },
-          error: () => this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
+          error: error => {
+            this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
+            console.log(error);
+            
+          }
         });    
     }
   }

@@ -1,0 +1,20 @@
+{
+    "user": {
+        "username": "user",
+        "password": "user"
+    },
+    "users": [
+        {
+            "username": "sales",
+            "password": "sales"
+        },
+        {
+            "username": "procurement",
+            "password": "procurement"
+        },
+        {
+            "username": "hr",
+            "password": "hr"
+        }
+    ]
+}
