@@ -5,16 +5,16 @@
     },
     "users": [
         {
-            "username": "sales",
-            "password": "sales"
+            "username": "user1",
+            "password": "user1"
         },
         {
-            "username": "procurement",
-            "password": "procurement"
+            "username": "user2",
+            "password": "user2"
         },
         {
-            "username": "hr",
-            "password": "hr"
+            "username": "user3",
+            "password": "user3"
         }
     ]
 }
