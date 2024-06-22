@@ -62,16 +62,10 @@ export class LoginComponent {
       this.loginService.login(request)
         .subscribe({
           next: response => {
-            sessionStorage.setItem("token", response.token);
-            console.log(response);
-            
-            //this.router.navigate(["/"]);
+            sessionStorage.setItem("token", response.token);            
+            this.router.navigate(["/"]);
           },
-          error: error => {
-            this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
-            console.log(error);
-            
-          }
+          error: () => this.toastService.show("INVALID CREDENTIALS PROVIDED!", "CLOSE")
         });    
     }
   }

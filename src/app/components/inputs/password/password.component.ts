@@ -19,6 +19,7 @@ export class PasswordComponent {
   @Input() label: string = "";
   @Input() name: string = "";
   @Input() error: string = "";
+  @Input() id: string = "";
 
   @Output() sendPasswordEvent: EventEmitter<string> = new EventEmitter<string>();
 
