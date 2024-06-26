@@ -48,8 +48,8 @@ export class LoginComponent {
     return this.fg.get(key)?.value;
   }
 
-  get username(): AbstractControl | null {
-    return this.fg.get("username");
+  get username(): AbstractControl {
+    return this.fg.get("username")!;
   }
 
   login(): void {
