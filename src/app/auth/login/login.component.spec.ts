@@ -8,6 +8,7 @@ import { LoginResponse } from '../../shared/dto/responses/auths/login-response.m
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Role } from '../../shared/models/enums/role';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +20,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     const loginService: jasmine.SpyObj<LoginService> = jasmine.createSpyObj("LoginService", ["login"]);
-    const response: LoginResponse = { token: "token" };
+    const response: LoginResponse = { token: "token", role: Role.SALES };
     loginSpy = loginService.login.and.returnValue(of(response));
     
     await TestBed.configureTestingModule({

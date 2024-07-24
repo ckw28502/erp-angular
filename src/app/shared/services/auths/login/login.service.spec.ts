@@ -9,6 +9,7 @@ import userData from '../../../../../assets/data/users.json';
 import { LoginResponse } from '../../../dto/responses/auths/login-response.model';
 import { LoginRequest } from '../../../dto/requests/auths/login-request.model';
 import { environment } from '../../../../../environments/environment.development';
+import { Role } from '../../../models/enums/role';
 
 describe('LoginService', () => {
   let service: LoginService;
@@ -66,12 +67,14 @@ describe('LoginService', () => {
   });
 
   it('should return the access token if credentials are valid!', (done: DoneFn) => {
-    const responseBody: LoginResponse = { token: "token" };
+    const responseBody: LoginResponse = { 
+      token: "token",
+      role: Role.SALES
+     };
 
     service.login(request).subscribe({
       next: (response: LoginResponse) => {
         expect(response.token).toEqual(responseBody.token);
-        
         done();
       },
       error: () => fail("Request should not return error!")

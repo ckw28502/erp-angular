@@ -101,7 +101,6 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "codeCoverage": true,
             "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
