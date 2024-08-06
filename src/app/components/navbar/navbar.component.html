@@ -2,10 +2,10 @@
     <mat-toolbar-row>
         <span>ERP</span>
         <span class="spacer"></span>
-        <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="userMenu">Menu</button>
+        <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="userMenu" id="btnMenu">Menu</button>
         <mat-menu #userMenu="matMenu">
             <button mat-menu-item>Profile</button>
-            <button mat-menu-item>Logout</button>
+            <button mat-menu-item (click)="logout()" id="btnLogout">Logout</button>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>
