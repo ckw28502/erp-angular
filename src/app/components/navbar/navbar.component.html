@@ -1,12 +1,15 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>ERP</span>
+        <span class="me-12">ERP</span>
+        @for (menu of selectedMenu; track menu.url) {
+            <a [routerLink]="menu.url">
+                <button mat-button>{{ menu.title }}</button>
+            </a>
+        }
         <span class="spacer"></span>
-        <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="userMenu" id="btnMenu">Menu</button>
-        <mat-menu #userMenu="matMenu">
-            <button mat-menu-item>Profile</button>
-            <button mat-menu-item (click)="logout()" id="btnLogout">Logout</button>
-        </mat-menu>
+        @if (isLoggedIn) {
+            <button mat-button (click)="logout()" id="btnLogout">Logout</button>
+        }
     </mat-toolbar-row>
 </mat-toolbar>
   
